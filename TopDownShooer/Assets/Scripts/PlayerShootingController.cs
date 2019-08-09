@@ -14,29 +14,22 @@ public class PlayerShootingController : MonoBehaviour
     [SerializeField] private FixedJoystick joystick;
     [SerializeField] private LineRenderer fireLine;
 
+    [SerializeField] private WeaponController weapon;
+
     // Start is called before the first frame update
     void Start()
     {
         relload = relloadTime;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         Vector2 input = new Vector2(joystick.Horizontal, joystick.Vertical);
-        if (input != Vector2.zero) {
-
-            if (input.magnitude >= sensivity && relload >= relloadTime )
-            {
-                StartCoroutine(Shoot());
-                relload = 0f;
-            }else if (relload < relloadTime)
-            {
-                relload += Time.deltaTime;
-            }
-
-
-
+        if (input != Vector2.zero || Input.GetKey(KeyCode.Space)) {
+    
+            weapon.Shoot();
         }
     }
 
@@ -75,6 +68,8 @@ public class PlayerShootingController : MonoBehaviour
         fireLine.enabled = true;
 
         yield return new WaitForSeconds(0.02f);
+
+        
 
         fireLine.enabled = false;
     }
