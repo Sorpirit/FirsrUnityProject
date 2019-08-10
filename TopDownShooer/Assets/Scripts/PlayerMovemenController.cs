@@ -22,6 +22,8 @@ public class PlayerMovemenController : MonoBehaviour
     private void Update()
     {
         moveInput = new Vector2(movementJoystick.Horizontal, movementJoystick.Vertical);
+        if (moveInput == Vector2.zero) moveInput = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
+
         faceInput = new Vector2(faceingJoyStick.Horizontal, faceingJoyStick.Vertical);
         
     }
@@ -46,7 +48,11 @@ public class PlayerMovemenController : MonoBehaviour
         }
         else if (rb.velocity != Vector2.zero)
         {
-            rb.velocity = Vector2.zero;
+            rb.velocity /= acc;
+            if (rb.velocity.magnitude <= 0.5f)
+            {
+                rb.velocity = Vector2.zero;
+            }
         }
 
 

@@ -49,6 +49,11 @@ public class WeaponController : MonoBehaviour
 
     private void shoot()
     {
+        float xDispersion = Random.Range(-weapon.weaponModel.dispersion, weapon.weaponModel.dispersion);
+        float yDispersion = Random.Range(-weapon.weaponModel.dispersion, weapon.weaponModel.dispersion);
+
+        firePoint.up = new Vector2(firePoint.up.x + xDispersion, firePoint.up.y + yDispersion).normalized;
+
         RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.up);
         if (hitInfo)
         {
@@ -59,6 +64,8 @@ public class WeaponController : MonoBehaviour
         fireRateTimer = 0f;
 
         StartCoroutine(weapon.shootVisualEffects(hitInfo,firePoint));
+
+        firePoint.up = transform.up;
     }
 
     public void Reload()

@@ -6,7 +6,7 @@ public class SimpleWeapon : Weapon
 
     public SimpleWeapon()
     {
-        weaponModel = new WeaponModel("Simple Weapon", 230, 0.1f, 10f, 230);
+        weaponModel = new WeaponModel("Simple Weapon", 230, 0.1f, 10f, 230, 0.2f);
     }
 
 
@@ -32,6 +32,7 @@ public class SimpleWeapon : Weapon
             }
             else
             {
+               
                 line.SetPosition(1, firePoint.position + firePoint.up * 100);
             }
 
