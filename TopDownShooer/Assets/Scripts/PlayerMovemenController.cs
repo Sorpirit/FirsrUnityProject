@@ -7,8 +7,8 @@ public class PlayerMovemenController : MonoBehaviour
 {
     [SerializeField] private FixedJoystick movementJoystick;
     [SerializeField] private FixedJoystick faceingJoyStick;
-    [SerializeField] private float acc = 1;
-    [SerializeField] private int maxSpeed = 1;
+
+    [SerializeField] private float Speed = 1f;
 
     private Rigidbody2D rb; 
     private Vector2 moveInput;
@@ -22,9 +22,10 @@ public class PlayerMovemenController : MonoBehaviour
     private void Update()
     {
         moveInput = new Vector2(movementJoystick.Horizontal, movementJoystick.Vertical);
-        if (moveInput == Vector2.zero) moveInput = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
+        if (moveInput == Vector2.zero) moveInput = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical")).normalized;
 
         faceInput = new Vector2(faceingJoyStick.Horizontal, faceingJoyStick.Vertical);
+        if (faceInput == Vector2.zero  && moveInput == Vector2.zero) faceInput = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
     }
 
@@ -40,6 +41,7 @@ public class PlayerMovemenController : MonoBehaviour
             transform.up = moveInput.normalized;
         }
 
+
         if (moveInput != Vector2.zero)
         {
 
@@ -48,11 +50,7 @@ public class PlayerMovemenController : MonoBehaviour
         }
         else if (rb.velocity != Vector2.zero)
         {
-            rb.velocity /= acc;
-            if (rb.velocity.magnitude <= 0.5f)
-            {
-                rb.velocity = Vector2.zero;
-            }
+            Stop();
         }
 
 
@@ -60,10 +58,11 @@ public class PlayerMovemenController : MonoBehaviour
 
     private void Move()
     {
-        if (rb.velocity.magnitude < maxSpeed)
-        {
-            rb.velocity += (Vector2)moveInput.normalized * acc * Time.deltaTime;
-        }
+        rb.velocity = moveInput * Speed; 
+    }
+    private void Stop()
+    {
+        rb.velocity = Vector2.zero;
     }
 
 }

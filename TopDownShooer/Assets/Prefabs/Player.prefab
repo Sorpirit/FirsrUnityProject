@@ -302,9 +302,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8779c661830610e44898b4f6e7e90b06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystick: {fileID: 0}
-  acc: 0
-  maxSpeed: 0
+  movementJoystick: {fileID: 0}
+  faceingJoyStick: {fileID: 0}
+  Speed: 5
 --- !u!114 &723317963821375231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,7 +317,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16870c31c21e73046bf0a4552fb5eba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingPoint: {fileID: 216320108184611604}
-  damage: 5
   joystick: {fileID: 0}
-  fireLine: {fileID: 1260745276187463659}
+  weapon: {fileID: 0}

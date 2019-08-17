@@ -7,9 +7,6 @@ public class WeaponController : MonoBehaviour
 
     //You should set by mamager or monualy
     private Weapon weapon;
-
-   
-
     
     private int bullets;
     private float reloadTimer;
@@ -17,14 +14,6 @@ public class WeaponController : MonoBehaviour
 
     //Set by unity
     [SerializeField] private Transform firePoint;
-
-    void Start()
-    {
-        weapon = new SimpleWeapon();
-        bullets = weapon.weaponModel.clip;
-        reloadTimer = -1f;
-        fireRateTimer = 0f;
-    }
 
     void Update()
     {
@@ -85,5 +74,16 @@ public class WeaponController : MonoBehaviour
 
         }
     }
+    public void setWeapon(Weapon weapon)
+    {
+        this.weapon = weapon;
+        bullets = weapon.weaponModel.clip;
+        reloadTimer = -1f;
+        fireRateTimer = 0f;
+    }
 
+    public Weapon GetWeapon()
+    {
+        return weapon;
+    }
 }

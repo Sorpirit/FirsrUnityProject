@@ -14,7 +14,10 @@ public class EnemyStatsController : MonoBehaviour
         if (hp <= 0) Destroy(this.gameObject);
     }
 
-    
+    public float getHp()
+    {
+        return hp;
+    }
     
 
     private void OnCollisionStay2D(Collision2D collision)

@@ -6,13 +6,14 @@ public class SimpleWeapon : Weapon
 
     public SimpleWeapon()
     {
-        weaponModel = new WeaponModel("Simple Weapon", 230, 0.1f, 10f, 230, 0.2f);
+        weaponModel = new WeaponModel("Simple Weapon", 230, 0.1f, 3f, 230, 0.2f);
     }
 
 
     public override void Shoot(RaycastHit2D hitInfo)
     {
-        Debug.Log("Shoot");
+        EnemyStatsController enemy = hitInfo.transform.GetComponent<EnemyStatsController>();
+        if (enemy != null) enemy.TakeDamege(weaponModel.damage);
     }
 
     public override void Reload()
@@ -34,6 +35,7 @@ public class SimpleWeapon : Weapon
             {
                
                 line.SetPosition(1, firePoint.position + firePoint.up * 100);
+                
             }
 
             line.enabled = true;
@@ -45,6 +47,7 @@ public class SimpleWeapon : Weapon
         {
             line.enabled = false;
         }
+       
     }
 
     public override IEnumerator reloadVisualEffects(Transform position)
