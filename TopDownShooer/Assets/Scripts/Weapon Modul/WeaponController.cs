@@ -8,7 +8,9 @@ public class WeaponController : MonoBehaviour
     //You should set by mamager or monualy
     private Weapon weapon;
     
-    private int bullets;
+
+    [SerializeField] private int bullets;
+    private int clip;
     private float reloadTimer;
     private float fireRateTimer;
 
@@ -26,11 +28,11 @@ public class WeaponController : MonoBehaviour
 
     public void Shoot()
     {
-        if (fireRateTimer >= weapon.weaponModel.fireRate && bullets > 0)
+        if (fireRateTimer >= weapon.weaponModel.fireRate && clip > 0)
         {
             shoot();
 
-        }else if (bullets <= 0)
+        }else if (clip <= 0)
         {
             Reload();
         }
@@ -43,13 +45,15 @@ public class WeaponController : MonoBehaviour
 
         firePoint.up = new Vector2(firePoint.up.x + xDispersion, firePoint.up.y + yDispersion).normalized;
 
-        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.up);
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.up, Mathf.Infinity, LayerMask.GetMask("HitBox"));
         if (hitInfo)
         {
             weapon.Shoot(hitInfo);
+            
         }
 
-        bullets--;
+
+        clip--;
         fireRateTimer = 0f;
 
         StartCoroutine(weapon.shootVisualEffects(hitInfo,firePoint));
@@ -68,7 +72,19 @@ public class WeaponController : MonoBehaviour
         {
 
             weapon.Reload();
-            bullets = weapon.weaponModel.clip;
+            
+            clip = weapon.weaponModel.clip;
+            if(clip > bullets)
+            {
+                clip = bullets;
+                bullets = 0;
+                Debug.Log("Out of amo");
+            }
+            else
+            {
+                bullets -= clip;
+            }
+
             reloadTimer = -1f;
             StartCoroutine(weapon.reloadVisualEffects(transform));
 
@@ -76,8 +92,9 @@ public class WeaponController : MonoBehaviour
     }
     public void setWeapon(Weapon weapon)
     {
+        //@TODO
         this.weapon = weapon;
-        bullets = weapon.weaponModel.clip;
+        clip = weapon.weaponModel.clip; // Logical Error
         reloadTimer = -1f;
         fireRateTimer = 0f;
     }

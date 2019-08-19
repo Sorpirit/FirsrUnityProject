@@ -12,6 +12,7 @@ public class BulletController : MonoBehaviour
     [SerializeField] private float damage;
 
     public Transform target;
+    public Transform parent;
 
     private float speed;
     private Rigidbody2D myRb;
@@ -48,6 +49,16 @@ public class BulletController : MonoBehaviour
                 if(playerStats != null)
                 {
                     playerStats.TakeDamage(damage);
+                    Destroy(gameObject);
+                }
+                break;
+            case "Enemy":
+                if (collision.gameObject.transform == parent) return;
+
+                EnemyStatsController enemyStats = collision.gameObject.GetComponent<EnemyStatsController>();
+                if (enemyStats != null)
+                {
+                    enemyStats.TakeDamege(damage);
                     Destroy(gameObject);
                 }
                 break;

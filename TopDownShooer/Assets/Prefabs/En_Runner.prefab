@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 472048646025643654}
   m_Layer: 0
   m_Name: En_Runner
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0984f2bf63cd92b4bb2385485b433393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  maxHp: 100
   damage: 30
 --- !u!114 &1663085301114370665
 MonoBehaviour:

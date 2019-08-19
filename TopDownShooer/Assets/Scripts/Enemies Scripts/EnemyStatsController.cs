@@ -5,13 +5,25 @@ using UnityEngine;
 
 public class EnemyStatsController : MonoBehaviour
 {
-    [SerializeField] private float hp = 100;
+    [SerializeField] private float maxHp = 100;
     [SerializeField] private float damage = 30;
+
+    private float hp;
+
+    private void Start()
+    {
+        hp = maxHp;
+    }
 
     public void TakeDamege(float damage)
     {
         hp -= damage;
         if (hp <= 0) Destroy(this.gameObject);
+    }
+    public void Heal(float heal)
+    {
+        hp += heal;
+        if (hp > maxHp) hp = maxHp;
     }
 
     public float getHp()

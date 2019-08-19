@@ -7,8 +7,9 @@ public class SpawnEnemy : MonoBehaviour
 {
 
     [SerializeField] private float spawnRate;
-    [SerializeField] private GameObject enemy;
     [SerializeField] private Transform target;
+
+    [SerializeField] private GameObject[] enemy;
 
     [SerializeField] private Transform[] spawnerPoints;
 
@@ -16,7 +17,8 @@ public class SpawnEnemy : MonoBehaviour
 
     private void Start()
     {
-        enemy.GetComponent<AIDestinationSetter>().target = target;
+
+        SetEnemysTarget();
     }
 
     private void Update()
@@ -33,7 +35,15 @@ public class SpawnEnemy : MonoBehaviour
     private void SpawnNewEnemy()
     {
         int randomIndex = Random.Range(0,spawnerPoints.Length);
-        GameObject obj = Instantiate(enemy,spawnerPoints[randomIndex].position, Quaternion.identity);
+        GameObject obj = Instantiate(enemy[Random.Range(0,enemy.Length)],spawnerPoints[randomIndex].position, Quaternion.identity);
         obj.transform.SetParent(transform);
+    }
+
+    private void SetEnemysTarget()
+    {
+        for (int i=0;i<enemy.Length;i++)
+        {
+            enemy[i].GetComponent<AIDestinationSetter>().target = target;
+        }
     }
 }
