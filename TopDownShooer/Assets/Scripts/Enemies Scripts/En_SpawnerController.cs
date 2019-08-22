@@ -11,11 +11,11 @@ public class En_SpawnerController : MonoBehaviour
     [SerializeField] private int enemysAmount;
     [SerializeField] private float fireRate;
     [SerializeField] private float damage;
-    [SerializeField] private EnemyStatsController myStats;
+    [SerializeField] private HpStats myStats;
     [SerializeField] private AIPath path;
 
     private Transform target;
-    private PlayerStatsController victim;
+    private HpStats victim;
 
     private float fireRateTimer;
     private float spawnRateTimer;
@@ -23,7 +23,7 @@ public class En_SpawnerController : MonoBehaviour
     void Start()
     {
         target = gameObject.GetComponent<AIDestinationSetter>().target;
-        victim = target.gameObject.GetComponent<PlayerStatsController>();
+        victim = target.gameObject.GetComponent<HpStats>();
         enemy.gameObject.GetComponent<AIDestinationSetter>().target = target;
 
         fireRateTimer = fireRate;
@@ -34,8 +34,8 @@ public class En_SpawnerController : MonoBehaviour
     {
         if (path.reachedDestination && fireRateTimer >= fireRate)
         {
-            victim.TakeDamage(damage);
-            myStats.Heal(damage);
+            victim.TakeDamage(new Damage(damage,BodyPart.HEAD));
+            myStats.Heal(new Heal(damage));
             fireRateTimer = 0f;
 
         }else if (fireRateTimer < fireRate)

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class SimpleWeapon : Weapon
@@ -12,8 +13,21 @@ public class SimpleWeapon : Weapon
 
     public override void Shoot(RaycastHit2D hitInfo)
     {
-        EnemyStatsController enemy = hitInfo.transform.GetComponent<EnemyStatsController>();
-        if (enemy != null) enemy.TakeDamege(weaponModel.damage);
+        HpStats enemy = hitInfo.transform.gameObject.GetComponentInParent<HpStats>();
+        if (enemy != null)
+        {
+            BodyPart part = BodyPart.BODY;
+            if (!Enum.TryParse(hitInfo.collider.name, out part))
+            {
+                Debug.Log("Body part CONVERT error. Cant convert \""+ hitInfo.collider.name + "\" to body part. \n Pleas add corect it or add it to body part");
+            }
+
+            Damage damage = new Damage(weaponModel.damage, part);
+            enemy.TakeDamage(damage);
+        }
+
+        
+
     }
 
     public override void Reload()
@@ -23,6 +37,7 @@ public class SimpleWeapon : Weapon
 
     public override IEnumerator shootVisualEffects(RaycastHit2D hitInfo, Transform firePoint)
     {
+
         LineRenderer line = firePoint.parent.GetComponentInChildren<LineRenderer>();
         if(line != null)
         {

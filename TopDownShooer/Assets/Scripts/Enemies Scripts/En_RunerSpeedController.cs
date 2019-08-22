@@ -7,21 +7,21 @@ public class En_RunerSpeedController : MonoBehaviour
 {
     [SerializeField] private float speedIncreesingValue;
     [SerializeField] private AIPath maxSpeed;
-    [SerializeField] private EnemyStatsController statsController;
+    [SerializeField] private HpStats statsController;
 
     private float prevHp;
 
     private void Start()
     {
-        prevHp = statsController.getHp();
+        prevHp = statsController.hp;
     }
 
     private void Update()
     {
-        if (statsController.getHp() < prevHp)
+        if (statsController.hp < prevHp)
         {
-            maxSpeed.maxSpeed += speedIncreesingValue / statsController.getHp();
-            prevHp = statsController.getHp();
+            maxSpeed.maxSpeed += speedIncreesingValue / statsController.hp;
+            prevHp = statsController.hp;
         }
     }
 }

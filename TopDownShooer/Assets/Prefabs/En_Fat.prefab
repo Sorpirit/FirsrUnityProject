@@ -10,6 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3965565323542897558}
   - component: {fileID: 2280808357252568813}
+  - component: {fileID: 709451424658747085}
+  - component: {fileID: 8033656619705792718}
+  - component: {fileID: 7621117050747890306}
+  - component: {fileID: 5528555381156650882}
   m_Layer: 0
   m_Name: En_Fat
   m_TagString: Untagged
@@ -46,6 +50,97 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de1c5249dbe487e4586e45559ad8a1b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &709451424658747085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703787711076517743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d408921c76cac34b8c3d8c95956c387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP_MAX: 1500
+--- !u!114 &8033656619705792718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703787711076517743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  drawGizmos: 1
+  detailedGizmos: 0
+  startEndModifier:
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  graphMask:
+    value: -1
+--- !u!114 &7621117050747890306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703787711076517743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
+  radius: 2.05
+  height: 0.01
+  repathRate: 0.62
+  canSearch: 1
+  canMove: 1
+  maxSpeed: 0.5
+  gravity: {x: 0, y: 0, z: 0}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 311
+  centerOffsetCompatibility: NaN
+  orientation: 1
+  enableRotation: 1
+  targetCompatibility: {fileID: 0}
+  maxAcceleration: -2.5
+  rotationSpeed: 360
+  slowdownDistance: 2.58
+  pickNextWaypointDist: 3.96
+  endReachedDistance: 1.41
+  alwaysDrawGizmos: 0
+  slowWhenNotFacingTarget: 1
+  whenCloseToDestination: 0
+  constrainInsideGraph: 0
+--- !u!114 &5528555381156650882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703787711076517743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  target: {fileID: 0}
 --- !u!1 &3771132098836667443
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,8 +152,8 @@ GameObject:
   - component: {fileID: 6255075919641696365}
   - component: {fileID: 6389391892967527463}
   - component: {fileID: 3639794530337889314}
-  m_Layer: 0
-  m_Name: Body
+  m_Layer: 9
+  m_Name: BODY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,8 +263,8 @@ GameObject:
   - component: {fileID: 8721814984619541811}
   - component: {fileID: 1511031998668117506}
   - component: {fileID: 3318763534419653293}
-  m_Layer: 0
-  m_Name: Head
+  m_Layer: 9
+  m_Name: HEAD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -268,8 +363,8 @@ GameObject:
   - component: {fileID: 9103625843144010093}
   - component: {fileID: 8119921989743211800}
   - component: {fileID: 900101932570236820}
-  m_Layer: 0
-  m_Name: LeftArm
+  m_Layer: 9
+  m_Name: ARM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,8 +472,8 @@ GameObject:
   - component: {fileID: 3988902866381271708}
   - component: {fileID: 993255002154573842}
   - component: {fileID: 3030386622564791440}
-  m_Layer: 0
-  m_Name: RightArm
+  m_Layer: 9
+  m_Name: ARM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

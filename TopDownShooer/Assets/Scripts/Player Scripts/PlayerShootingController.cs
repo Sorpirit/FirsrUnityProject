@@ -10,7 +10,7 @@ public class PlayerShootingController : MonoBehaviour
     void Update()
     {
         Vector2 input = new Vector2(joystick.Horizontal, joystick.Vertical);
-        if (input != Vector2.zero || Input.GetKey(KeyCode.Space)) {
+        if (input != Vector2.zero || Input.GetMouseButton(0)) {
     
             weapon.Shoot();
         }

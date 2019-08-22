@@ -10,6 +10,8 @@ public class WeaponController : MonoBehaviour
     
 
     [SerializeField] private int bullets;
+    [SerializeField] private GameObject fireEffect;
+    [SerializeField] private GameObject bulletExplosionEffect;
     private int clip;
     private float reloadTimer;
     private float fireRateTimer;
@@ -45,11 +47,13 @@ public class WeaponController : MonoBehaviour
 
         firePoint.up = new Vector2(firePoint.up.x + xDispersion, firePoint.up.y + yDispersion).normalized;
 
-        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.up, Mathf.Infinity, LayerMask.GetMask("HitBox"));
+        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.up);
         if (hitInfo)
         {
-            weapon.Shoot(hitInfo);
-            
+            if(hitInfo.transform.gameObject.layer.Equals(LayerMask.NameToLayer("HitBox")))
+                weapon.Shoot(hitInfo);
+
+            Instantiate(bulletExplosionEffect, hitInfo.point, Quaternion.identity);
         }
 
 
@@ -57,6 +61,8 @@ public class WeaponController : MonoBehaviour
         fireRateTimer = 0f;
 
         StartCoroutine(weapon.shootVisualEffects(hitInfo,firePoint));
+
+        Instantiate(fireEffect, firePoint.transform);
 
         firePoint.up = transform.up;
     }

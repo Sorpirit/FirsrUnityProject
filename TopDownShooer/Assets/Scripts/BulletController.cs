@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -41,27 +41,27 @@ public class BulletController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        switch (collision.transform.tag)
-        {
-            case "Player":
+        if (collision.gameObject.transform == parent) return;
 
-                PlayerStatsController playerStats = collision.gameObject.GetComponent<PlayerStatsController>();
-                if(playerStats != null)
-                {
-                    playerStats.TakeDamage(damage);
-                    Destroy(gameObject);
-                }
-                break;
-            case "Enemy":
-                if (collision.gameObject.transform == parent) return;
+        if (collision.collider.gameObject.layer  == LayerMask.NameToLayer("HitBox")) {
+            BodyPart part = BodyPart.BODY;
+            if (!Enum.TryParse(collision.collider.name, out part))
+            {
+                Debug.Log("Body part CONVERT error. Cant convert \"" + collision.collider.name + "\" to body part. \n Pleas add corect it or add it to body part");
+            }
 
-                EnemyStatsController enemyStats = collision.gameObject.GetComponent<EnemyStatsController>();
-                if (enemyStats != null)
-                {
-                    enemyStats.TakeDamege(damage);
-                    Destroy(gameObject);
-                }
-                break;
+            Damage damage = new Damage(this.damage, part);
+
+            HpStats hpStats = collision.transform.gameObject.GetComponentInParent<HpStats>();
+            if (hpStats != null)
+            {
+                hpStats.TakeDamage(damage);
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.LogWarning("Cannt find the HpStats on gameObject");
+            }
         }
     }
 

@@ -98,7 +98,7 @@ MonoBehaviour:
   acc: 0.07
   maxSpeed: 6
   lifeTime: 4
-  damage: 45
+  damage: 47
   target: {fileID: 0}
   parent: {fileID: 0}
 --- !u!50 &5545745538027970212

@@ -25,8 +25,11 @@ public class PlayerMovemenController : MonoBehaviour
         if (moveInput == Vector2.zero) moveInput = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical")).normalized;
 
         faceInput = new Vector2(faceingJoyStick.Horizontal, faceingJoyStick.Vertical);
-        if (faceInput == Vector2.zero  && moveInput == Vector2.zero) faceInput = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        
+        if (faceInput == Vector2.zero)
+        {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            faceInput = new Vector2( mousePos.x - transform.position.x, mousePos.y - transform.position.y);
+        }
     }
 
     private void FixedUpdate()
